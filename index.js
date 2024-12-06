@@ -15,7 +15,7 @@ const currentDateTxt = document.querySelector('.current-date-txt')
 
 const forecastItemsContainer = document.querySelector('.forecast-items-container')
 
-const apiKey = '6ebae0c4fb0689a2c749138c739f3e9c'
+const apiKey = 'Your API Key'
 
 searchBtn.addEventListener('click', () => {
     if (cityInput.value.trim() != '') {
@@ -110,7 +110,6 @@ async function updateForecastsInfo(city) {
 }
 
 function updateForecastsItems(weatherData) {
-    console.log(weatherData)
     const {
         dt_txt: date,
         weather: [{ id }],
