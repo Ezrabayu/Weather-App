@@ -53,6 +53,7 @@ function getWeatherIcon(id) {
     else return 'clouds.svg'
 }
 
+// Fungsi untuk memperbarui tanggal dan jam secara real-time
 function updateCurrentDate() {
     const currentDate = new Date();
     const options = {
@@ -61,11 +62,27 @@ function updateCurrentDate() {
         month: 'short',
         year: 'numeric'
     };
-    
-    currentDateTxt.textContent = currentDate.toLocaleDateString('en-GB', options);
+
+    // Format tanggal
+    const formattedDate = currentDate.toLocaleDateString('en-GB', options);
+
+    // Format jam, menit, detik
+    let hours = currentDate.getHours();
+    let minutes = currentDate.getMinutes();
+    let seconds = currentDate.getSeconds();
+
+    // Menambahkan leading zero untuk jam, menit, detik jika kurang dari 10
+    hours = (hours < 10) ? '0' + hours : hours;
+    minutes = (minutes < 10) ? '0' + minutes : minutes;
+    seconds = (seconds < 10) ? '0' + seconds : seconds;
+
+    // Gabungkan tanggal dan waktu dalam satu string
+    currentDateTxt.textContent = `${formattedDate} ${hours}:${minutes}:${seconds}`;
 }
 
+// Panggil fungsi updateCurrentDate setiap detik
 setInterval(updateCurrentDate, 1000);
+
 
 async function updateWeatherInfo(city) {
     const weatherData = await getFetchData('weather', city)
